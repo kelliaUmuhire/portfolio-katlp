@@ -1,0 +1,246 @@
+.posts-title {
+  font-size: 14px;
+  margin-top: 60px;
+  padding: 0px 30px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.posts {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding: 5px 30px;
+}
+
+.post-cont {
+  padding: 12px 16px;
+  width: 14%;
+  flex-wrap: wrap;
+  background-color: #0c314b;
+  position: relative;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.post-cont a {
+  color: #d458ab;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.post-title {
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 2.5rem;
+}
+.post-cont img {
+  position: absolute;
+  top: -25%;
+  width: 90px;
+  height: 95px;
+  left: 21%;
+}
+
+.p-post {
+  font-family: "Open Sans", sans-serif;
+  padding: 10px 30px;
+  margin-top: 50px;
+}
+.p-post-header {
+  display: flex;
+}
+.p-post-header img {
+  width: 115px;
+  height: 120px;
+}
+
+.p-post-header .p-post-h {
+  margin-top: 20px;
+}
+
+.p-post-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.rate {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.rate-imgs img {
+  margin-top: 20px;
+  margin-right: 4px;
+  width: 22px;
+}
+
+.more {
+  color: #d458ab;
+  font-family: "Open Sans", sans-serif;
+  margin-top: 60px;
+  display: flex;
+  padding: 0px 30px;
+}
+
+.more ion-icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.more-sec {
+  width: 100%;
+}
+
+.more-sec .posts .post-cont {
+  width: 14% !important;
+}
+
+.comments {
+  font-family: "Open Sans", sans-serif;
+  padding: 0px 30px;
+  margin-top: 60px;
+  position: relative;
+}
+
+.add-com {
+  position: relative;
+  margin-top: 30px;
+}
+.add-com .input-group {
+  margin-top: 8px;
+}
+
+.add-com .input-group div {
+  text-transform: uppercase;
+  color: #ededed;
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.add-com .input-group input,
+.add-com .input-group textarea {
+  width: 30%;
+  height: 35px;
+}
+.add-com button {
+  background-color: #d458ab;
+  color: black;
+  border: 0px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 12px;
+  margin-top: 12px;
+  border-radius: 2px;
+  position: absolute;
+  right: 70%;
+}
+
+.cmts {
+  margin-top: 120px;
+}
+
+.cmt {
+  display: flex;
+  font-size: 13px;
+  margin-top: 18px;
+}
+
+.cmt-pic {
+  background-color: #0c314b;
+  padding: 8px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.cmt-cont .cmt-h {
+  display: flex;
+  margin-top: 2px;
+}
+
+.cmt-c {
+  color: #ededed;
+  font-size: 13px;
+  display: flex;
+  margin-top: 3px;
+}
+
+.cmt-c ion-icon {
+  margin-left: 2px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.post-t-t2 {
+  font-size: 13px;
+  color: #ededed;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+/* .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+} */
+
+@media (max-width: 600px) {
+  .posts-title {
+    padding: 0px 20px;
+  }
+  .posts,
+  .more,
+  .p-post,
+  .comments {
+    padding: 5px 20px;
+    margin-top: 20px;
+  }
+  .post-cont {
+    width: 45%;
+    margin-right: 16px;
+    margin-top: 40px;
+  }
+  .rate-imgs img {
+    width: 30px;
+    margin-right: 6px;
+  }
+  .more-sec .posts .post-cont {
+    width: 45% !important;
+  }
+  .add-com .input-group input,
+  .add-com .input-group textarea {
+    width: 100%;
+    height: 40px;
+  }
+  .add-com button {
+    right: 0;
+  }
+  .cmt {
+    font-size: 15px;
+  }
+  .cmt-c {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,168 @@
+.dash-nav {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.dash-nav a {
+  text-decoration: none;
+  color: #ffff;
+}
+
+.dash-nav .add-article {
+  display: flex;
+  margin-left: 40px;
+  cursor: pointer;
+  padding: 8px 0px;
+}
+.dash-nav .d-1 {
+  cursor: pointer;
+  padding: 8px 0px;
+}
+
+.articles {
+  margin-top: 70px;
+}
+
+.articles .a-h1,
+.new-article .a-h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.posts {
+  width: 100% !important;
+  margin-top: 80px !important;
+}
+.post-title {
+  font-size: 14px !important;
+}
+.post-t-2 {
+  font-size: 13px !important;
+  padding: 10px 0px;
+}
+
+.post-cont img {
+  height: 110px !important;
+  width: 90px !important;
+  top: -30% !important;
+  left: 25% !important;
+}
+
+.actions {
+  display: flex;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.actions div {
+  margin-right: 10px;
+  border-bottom: 1px solid #d458ab;
+  cursor: pointer;
+}
+
+.new-article {
+  padding: 0px 100px;
+  margin: 90px 0px;
+}
+
+.a-form {
+  margin-top: 40px;
+  position: relative;
+}
+.a-form .input-group {
+  margin: 10px 0px;
+}
+.a-form .input-group div {
+  font-size: 11px;
+  color: #d2d2d2;
+  margin: 2px 0px;
+}
+.a-form .input-group input {
+  width: 40%;
+  height: 35px;
+}
+
+.editor {
+  background-color: #282333;
+  border-radius: 10px;
+  margin: 20px 0px;
+  padding: 20px;
+  width: 80%;
+}
+
+.editor .tools {
+  display: flex;
+}
+
+.editor .tools .t-cont {
+  display: flex;
+  margin-right: 20px;
+}
+
+.editor .tools .t-cont div {
+  background-color: #1c1727;
+  padding: 2px 8px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
+.editor .tools .t-cont div svg {
+  width: 15px;
+  height: 15px;
+}
+
+.editor textarea {
+  margin-top: 20px;
+  border: 0px;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #4f4b57;
+  height: 300px;
+  color: #d2d2d2;
+}
+
+.a-form button {
+  background-color: #d458ab;
+  color: black;
+  border: 0px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 2px;
+  position: absolute;
+  right: 20%;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .posts {
+    margin-top: 40px !important;
+  }
+  .new-article {
+    padding: 0px 30px;
+  }
+  .a-form .input-group input,
+  .editor {
+    width: 100%;
+  }
+  .a-form button {
+    right: 0;
+  }
+  .editor .tools .t-cont {
+    margin-right: 10px;
+  }
+}

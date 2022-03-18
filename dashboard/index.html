@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../styles/home.css" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/posts.css" />
+    <style>
+      .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">Kellia Umuhire</div>
+      </div>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+
+    <div class="dash-nav">
+      <div class="d-1" style="border-bottom: 1px solid #d458ab; color: #d458ab">
+        <a href="./">Articles</a>
+      </div>
+      <div class="add-article">
+        <ion-icon
+          name="add"
+          style="margin: 1px 0px 0px 3px; cursor: pointer"
+        ></ion-icon>
+        <div><a href="./new-article.html">New Article</a></div>
+      </div>
+    </div>
+
+    <div class="articles">
+      <div class="a-h1">All articles</div>
+      <div class="posts">
+        <div class="post-cont">
+          <img src="../images/bgm.png" alt="egg" />
+          <div class="post-title">Egg Challenge</div>
+          <div class="post-t-2">
+            Solution to the popular egg challenge that broke the internet.
+          </div>
+
+          <div class="actions">
+            <div>EDIT</div>
+            <div style="color: #d458ab">DELETE</div>
+          </div>
+        </div>
+        <div class="post-cont">
+          <img src="../images/egg.png" alt="egg" />
+          <div class="post-title">Egg Challenge</div>
+          <div class="post-t-2">
+            Solution to the popular egg challenge that broke the internet.
+          </div>
+
+          <div class="actions">
+            <div>EDIT</div>
+            <div style="color: #d458ab">DELETE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>made by kel.</div>
+      <div class="footer-f">
+        <div>posts</div>
+        <div>newsletter</div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  </body>
+</html>

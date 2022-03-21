@@ -1,13 +1,4 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0px;
-  background-color: #171221;
-  font-family: "Open Sans", sans-serif;
-  /* font-family: "Montserrat", sans-serif; */
-}
+/* Navbar */
 
 .nav {
   height: 50px;
@@ -40,6 +31,7 @@ body {
   display: inline;
   float: right;
   font-size: 18px;
+  z-index: 10;
   /* padding-top: 20px; */
 }
 
@@ -60,6 +52,10 @@ body {
   display: none;
 }
 
+/* End */
+
+/* Skills */
+
 .skills-container {
   margin-top: 8rem;
   width: 100%;
@@ -75,8 +71,6 @@ body {
 
 .skills-cont {
   width: 80%;
-
-  /* background-color: #ddd; */
 }
 
 .skills {
@@ -116,6 +110,10 @@ body {
   border-radius: 10px;
 }
 
+/* End */
+
+/* Footer */
+
 .footer {
   background-color: #211d28;
   color: white;
@@ -134,6 +132,8 @@ body {
 .footer-f div {
   margin-right: 20px;
 }
+
+/* End */
 
 /* Login */
 .login {
@@ -184,6 +184,10 @@ body {
   border-radius: 2px;
   cursor: pointer;
   width: 10%;
+}
+.login button a {
+  text-decoration: none;
+  color: #fff;
 }
 /* End */
 
@@ -236,7 +240,6 @@ body {
     overflow-y: hidden;
     top: 50px;
     left: 0px;
-    /* padding-top: 20px; */
   }
   .nav > .nav-links > a {
     display: block;

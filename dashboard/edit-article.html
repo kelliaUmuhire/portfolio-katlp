@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit your article</title>
+    <link rel="stylesheet" href="../styles/home.css" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <div class="nav">
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">Kellia Umuhire</div>
+      </div>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+
+    <div class="dash-nav">
+      <div class="d-1">
+        <a href="./index.html">Articles</a>
+      </div>
+      <div
+        class="add-article"
+        style="border-bottom: 1px solid #d458ab; color: #d458ab"
+      >
+        <ion-icon
+          name="add"
+          style="margin: 1px 3px 0px 0px; cursor: pointer"
+        ></ion-icon>
+        <div><a href="./">New Article</a></div>
+      </div>
+    </div>
+
+    <div class="new-article">
+      <div class="a-h1" style="text-align: left">NEW ARTICLE</div>
+      <div class="a-form">
+        <div class="input-group">
+          <div>NAME</div>
+          <input type="text" value="Egg Challenge" />
+        </div>
+        <div class="input-group">
+          <div>CHOOSE PHOTO</div>
+          <input type="text" />
+        </div>
+        <div class="editor">
+          <div class="tools">
+            <div class="t-cont">
+              <div style="border-radius: 8px 0px 0px 8px">
+                <!-- <img src="../images/tools/bold.png" alt="Bold" /> -->
+                <i data-feather="bold"></i>
+              </div>
+              <div>
+                <i data-feather="italic"></i>
+              </div>
+              <div style="border-radius: 0px 8px 8px 0px">
+                <i data-feather="type"></i>
+              </div>
+            </div>
+
+            <div class="t-cont">
+              <div style="border-radius: 8px 0px 0px 8px">
+                <i data-feather="align-left"></i>
+              </div>
+              <div>
+                <i data-feather="align-center"></i>
+              </div>
+              <div style="border-radius: 0px 8px 8px 0px">
+                <i data-feather="align-right"></i>
+              </div>
+            </div>
+
+            <div class="t-cont">
+              <div style="border-radius: 8px 0px 0px 8px">
+                <i data-feather="image"></i>
+              </div>
+              <div style="border-radius: 0px 8px 8px 0px">
+                <i data-feather="link-2"></i>
+              </div>
+            </div>
+          </div>
+          <textarea name="t-area" placeholder="Type something..">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur cursus metus a quam sagittis gravida. Pellentesque imperdiet malesuada dui, eget volutpat risus luctus non. Proin lacinia lacinia aliquet. Proin scelerisque tellus urna, et dignissim nisl convallis vel. Integer a pretium nisl. Integer rhoncus dolor vitae volutpat
+consequat. Suspendisse lectus metus, ullamcorper at sapien sed, pellentesque posuere nunc.</textarea
+          >
+        </div>
+        <button>SAVE</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>made by kel.</div>
+      <div class="footer-f">
+        <div>posts</div>
+        <div>newsletter</div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

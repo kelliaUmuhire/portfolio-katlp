@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #171221;
   margin: 0px;
   position: relative;
   width: 100%;
   color: white;
+  font-family: "Open Sans", sans-serif;
   height: 100vh;
 }
 

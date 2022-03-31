@@ -9,7 +9,7 @@
 
 .dash-nav a {
   text-decoration: none;
-  color: #ffff;
+  color: #d2d2d2;
 }
 
 .dash-nav .add-article {
@@ -78,6 +78,22 @@
 .new-article {
   padding: 0px 100px;
   margin: 90px 0px;
+  position: relative;
+  /* margin-top: 80px; */
+}
+
+.choose-pic {
+  cursor: pointer;
+  font-size: 11px !important;
+  color: #2c2c2c;
+  background-color: white;
+  padding: 8px 30px;
+  border-radius: 2px;
+}
+
+.choose-pic ion-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .a-form {
@@ -97,6 +113,22 @@
   height: 35px;
 }
 
+.c-blog-btn {
+  background-color: #d458ab;
+  color: black;
+  border: 0px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 2px;
+  position: absolute;
+  right: 20%;
+  cursor: pointer;
+}
+
+/* New Editor */
 .editor {
   background-color: #282333;
   border-radius: 10px;
@@ -138,21 +170,41 @@
   color: #d2d2d2;
 }
 
-.a-form button {
-  background-color: #d458ab;
-  color: black;
-  border: 0px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 13px;
-  border-radius: 2px;
-  position: absolute;
-  right: 20%;
-  cursor: pointer;
+/* User */
+.users {
+  margin: 50px 40px;
+}
+.user {
+  display: flex;
+  margin-top: 10px;
 }
 
+.user .profile {
+  background-color: #0c314b;
+  padding: 8px 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.user .name {
+  margin-top: 7px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+/* .footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+} */
 @media only screen and (max-width: 600px) {
   .posts {
     margin-top: 40px !important;
@@ -164,10 +216,13 @@
   .editor {
     width: 100%;
   }
-  .a-form button {
-    right: 0;
-  }
+  /* .c-blog-btn {
+    right: 10;
+  } */
   .editor .tools .t-cont {
     margin-right: 10px;
+  }
+  .users {
+    margin: 50px 20px;
   }
 }

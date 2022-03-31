@@ -4,16 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to the Dashboard!</title>
+    <title>Create a new article</title>
     <link rel="stylesheet" href="../styles/home.css" />
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/dashboard.css" />
-    <link rel="stylesheet" href="../styles/posts.css" />
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="../js/main.js"></script>
     <style>
       .footer {
         position: absolute;
-        bottom: 0;
         width: 100%;
+        bottom: 0;
       }
     </style>
   </head>
@@ -37,13 +42,7 @@
     </div>
 
     <div class="dash-nav">
-      <!-- <div class="d-1" style="border-bottom: 1px solid #d458ab; color: #d458ab">
-        <a href="./">Articles</a>
-      </div> -->
-      <div
-        class="add-article"
-        style="border-bottom: 1px solid #d458ab; color: #d458ab"
-      >
+      <div class="add-article">
         <ion-icon name="document"></ion-icon>
         <div style="margin-left: 4px">
           <a href="./index.html">Articles</a>
@@ -56,7 +55,10 @@
         ></ion-icon>
         <div><a href="./new-article.html">New Article</a></div>
       </div>
-      <div class="add-article">
+      <div
+        class="add-article"
+        style="border-bottom: 1px solid #d458ab; color: #d458ab"
+      >
         <ion-icon name="people"></ion-icon>
         <div style="margin-left: 4px">
           <a href="./users.html">Users</a>
@@ -70,34 +72,11 @@
       </div>
     </div>
 
-    <div class="articles">
-      <div class="a-h1">All articles</div>
-      <div class="posts">
-        <div class="post-cont">
-          <img src="../images/bgm.png" alt="egg" />
-          <div class="post-title">Egg Challenge</div>
-          <div class="post-t-2">
-            Solution to the popular egg challenge that broke the internet.
-          </div>
-
-          <div class="actions">
-            <div><a href="./edit-article.html">EDIT</a></div>
-            <div style="color: #d458ab">DELETE</div>
-          </div>
-        </div>
-        <div class="post-cont">
-          <img src="../images/egg.png" alt="egg" />
-          <div class="post-title">Egg Challenge</div>
-          <div class="post-t-2">
-            Solution to the popular egg challenge that broke the internet.
-          </div>
-
-          <div class="actions">
-            <div>EDIT</div>
-            <div style="color: #d458ab">DELETE</div>
-          </div>
-        </div>
-      </div>
+    <div class="users" id="users">
+      <!-- <div class="user">
+        <div class="profile">BA</div>
+        <div class="name">Boby Annro</div>
+      </div> -->
     </div>
 
     <div class="footer">
@@ -109,5 +88,34 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+      let users = localStorage.getItem("users");
+      if (users) {
+        users = JSON.parse(users);
+        let d_users = document.getElementById("users");
+        for (let i = 0; i < users.length; i++) {
+          let d_user = document.createElement("div");
+          d_user.className = "user";
+
+          let d_profile = document.createElement("div");
+          d_profile.className = "profile";
+          d_profile.innerHTML = users[i].profile;
+          let d_name = document.createElement("div");
+          d_name.className = "name";
+          d_name.innerHTML = users[i].name;
+
+          d_user.appendChild(d_profile);
+          d_user.appendChild(d_name);
+          d_users.appendChild(d_user);
+        }
+      }
+      //    else {
+      //     let users = [
+      //       { name: "Alan Walker", profile: "AW" },
+      //       { name: "Boby Annro", profile: "BA" },
+      //     ];
+      //     localStorage.setItem("users", JSON.stringify(users));
+      //   }
+    </script>
   </body>
 </html>

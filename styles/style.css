@@ -76,7 +76,8 @@ hr {
   display: flex;
   flex-wrap: wrap;
   font-family: "Open Sans", sans-serif;
-  padding: 20px 50px;
+
+  padding: 10px 25px;
 }
 
 .intro-2 .i-d1 {
@@ -174,6 +175,7 @@ textarea {
   font-size: 12px;
   margin-top: 12px;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .h1 {
@@ -270,10 +272,11 @@ textarea {
   font-family: "Open Sans", sans-serif;
   background-color: #0c314b;
   margin-top: 80px;
-  padding: 50px 0px;
+
   color: white;
   width: 100%;
-  /* height: 100%; */
+
+  padding: 30px 20px;
 }
 
 .news {
@@ -309,13 +312,11 @@ textarea {
   color: white;
   font-family: "Open Sans", sans-serif;
   border-radius: 10px;
-  /* width: 170px; */
-  width: 16%;
+  width: 100%;
   height: 210px;
   padding: 10px 16px;
   margin-right: 40px;
-  /* margin-top: 40px; */
-  /* padding: 60px 15px 0px 15px; */
+  margin-top: 45px;
 }
 
 .post-title {
@@ -328,19 +329,53 @@ textarea {
   top: -25%;
   width: 100px;
   height: 105px;
-  left: 22%;
+
+  left: 18%;
 }
 
-@media only screen and (max-width: 600px) {
+/* Desktop */
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+  .post {
+    width: 18%;
+    height: 210px;
+    padding: 10px 16px;
+    margin-top: 0px;
+  }
+  .posts {
+    padding: 50px 0px;
+  }
+  .intro-2 {
+    padding: 20px 50px;
+  }
+  .post img {
+    left: 25%;
+  }
+}
+/* Tablet */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .post {
+    width: 30%;
+    height: 210px;
+    padding: 10px 16px;
+    margin-top: 0px;
+  }
+  .post img {
+    left: 25%;
+  }
+}
+
+/* Mobile - corrections */
+@media only screen and (max-width: 768px) {
   .exp-talk {
     margin-top: 80px;
   }
   /* .h1 {
     font-size: 15px;
   } */
+
   .intro-2 .i-d1 {
     width: 100%;
-    margin: 30px 0px 0px 0px !important;
+    margin: 10px 0px 0px 0px !important;
   }
 
   .intro-2 .text {
@@ -367,26 +402,13 @@ textarea {
     top: 43%;
   }
 
-  .posts {
-    padding: 30px 20px;
-    width: 100%;
-  }
-
   .post-cont {
     margin-top: 2rem;
-  }
-  .post {
-    width: 100%;
-    /* margin-bottom: 30px; */
   }
 
   .post-title {
     padding-top: 40px;
   }
-  .post img {
-    left: 18%;
-  }
-
   .exp-talk {
     display: block;
     padding: 0px;

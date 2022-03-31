@@ -23,3 +23,9 @@ textarea {
 input {
   padding: 0 5px;
 }
+
+.error-msg {
+  color: rgb(255, 146, 146);
+  font-size: 12px;
+  margin-top: 3px;
+}

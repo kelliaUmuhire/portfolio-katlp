@@ -133,7 +133,7 @@
 
 .add-com .input-group input,
 .add-com .input-group textarea {
-  width: 30%;
+  width: 50%;
   height: 35px;
 }
 .add-com button {
@@ -148,7 +148,7 @@
   margin-top: 12px;
   border-radius: 2px;
   position: absolute;
-  right: 70%;
+  right: 50%;
   cursor: pointer;
 }
 

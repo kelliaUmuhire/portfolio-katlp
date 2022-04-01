@@ -1,3 +1,22 @@
+function checkNav() {
+  let nav_links = document.getElementsByClassName("nav-links")[0];
+  if (localStorage.getItem("auth_user")) {
+    nav_links.innerHTML = "";
+    let a1 = document.createElement("a");
+    a1.innerHTML = "Home";
+    a1.href = "../index.html";
+    let a2 = document.createElement("a");
+    a2.innerHTML = "Profile";
+    a2.href = "./profile.html";
+    let a3 = document.createElement("a");
+    a3.innerHTML = "Log out";
+    a3.href = "../index.html";
+    nav_links.appendChild(a1);
+    nav_links.appendChild(a2);
+    nav_links.appendChild(a3);
+  }
+}
+
 const validateContactForm = () => {
   let c_form_el = document
     .getElementById("contactForm")
@@ -8,7 +27,7 @@ const validateContactForm = () => {
 
   if (val1.length === 0) {
     c_form_el[0].getElementsByClassName("error-msg")[0].innerHTML =
-      "Email can't be empty";
+      "Email field can't be empty";
   } else if (!val1.includes("@") || !val1.includes(".")) {
     c_form_el[0].getElementsByClassName("error-msg")[0].innerHTML =
       "Email is not valid";
@@ -18,7 +37,7 @@ const validateContactForm = () => {
 
   if (val2.length === 0) {
     c_form_el[1].getElementsByClassName("error-msg")[0].innerHTML =
-      "Message can't be empty";
+      "Message field can't be empty";
   } else if (val2.length < 2 || val2.length > 200) {
     c_form_el[1].getElementsByClassName(
       "error-msg"
@@ -38,7 +57,8 @@ const validateBlogForm = () => {
   let r_val = false;
 
   if (val1.length === 0) {
-    document.getElementById("a_title_error").innerHTML = "Name can't be empty";
+    document.getElementById("a_title_error").innerHTML =
+      "Name field can't be empty";
   } else if (val1.length > 100) {
     document.getElementById("a_title_error").innerHTML =
       "Name lenght is too long";
@@ -49,7 +69,7 @@ const validateBlogForm = () => {
 
   if (val2.length === 0) {
     document.getElementById("a_content_error").innerHTML =
-      "Content can't be empty";
+      "Content field can't be empty";
   } else if (val2.length > 1000) {
     document.getElementById("a_content_error").innerHTML =
       "Content lenght is too long";
@@ -98,13 +118,14 @@ const saveData = () => {
   }
 };
 
-const loginFunc = () => {
+const validateAuthForms = (type) => {
   let email = document.querySelector("input[name=email").value;
   let password = document.querySelector("input[name=password").value;
-  let valid = false;
+  let valid = true;
 
   if (email.length === 0) {
-    document.getElementById("email_err").innerHTML = "Email can't be empty";
+    document.getElementById("email_err").innerHTML =
+      "Email field can't be empty";
     valid = false;
   } else if (!email.includes("@") || !email.includes(".")) {
     document.getElementById("email_err").innerHTML = "Email is not valid";
@@ -115,7 +136,8 @@ const loginFunc = () => {
   }
 
   if (password.length === 0) {
-    document.getElementById("pass_err").innerHTML = "Password can't be empty";
+    document.getElementById("pass_err").innerHTML =
+      "Password field can't be empty";
     valid = false;
   } else if (password.length < 6) {
     document.getElementById("pass_err").innerHTML =
@@ -129,7 +151,32 @@ const loginFunc = () => {
     valid = true;
   }
 
-  if (!valid) return;
+  if (type === "up") {
+    let name = document.querySelector("input[name=u_name").value;
+    if (name.length === 0) {
+      document.getElementById("name_err").innerHTML =
+        "Name field can't be empty";
+      valid = false;
+    } else if (name.length < 3) {
+      document.getElementById("name_err").innerHTML =
+        "Name lenght must not be less than 3";
+      valid = false;
+    } else if (name.length > 50) {
+      document.getElementById("name_err").innerHTML = "name lenght too long";
+      valid = false;
+    } else {
+      document.getElementById("name_err").innerHTML = null;
+      valid = true;
+    }
+  }
+
+  return valid;
+};
+
+const loginFunc = () => {
+  let email = document.querySelector("input[name=email").value;
+
+  if (!validateAuthForms("in")) return;
 
   let users = localStorage.getItem("users");
   if (users) {
@@ -144,14 +191,35 @@ const loginFunc = () => {
       }
     }
   }
+};
 
-  // localStorage.setItem("auth_user", JSON.stringify({ email }));
+const registerFunc = () => {
+  if (!validateAuthForms("up")) return;
+  let users = localStorage.getItem("users");
+  let uname = document.querySelector("input[name=u_name").value;
+  let profile = uname[0];
+  if (uname.split(" ")[1]) profile = profile.concat(uname.split(" ")[1][0]);
+  let user = {
+    name: uname,
+    email: document.querySelector("input[name=email").value,
+    profile,
+  };
+  if (users) {
+    users = JSON.parse(users);
+    users.push(user);
+  } else {
+    users = [user];
+  }
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("auth_user", JSON.stringify(user));
+  window.location.href = "../pages/posts.html";
 };
 
 const addComment = () => {
   let comment = document.querySelector("textarea[name=comment]").value;
   if (comment.length === 0) {
-    document.getElementById("comment_err").innerHTML = "Comment can't be empty";
+    document.getElementById("comment_err").innerHTML =
+      "Comment field can't be empty";
   } else if (comment.length < 2) {
     document.getElementById("comment_err").innerHTML = "Comment is too short";
   } else if (comment.length > 300) {

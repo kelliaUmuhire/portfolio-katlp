@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/dashboard.css" />
     <link rel="stylesheet" href="../styles/posts.css" />
+    <script src="../js/main.js"></script>
     <style>
       .footer {
         position: absolute;
@@ -73,8 +74,8 @@
 
     <div class="articles">
       <div class="a-h1">All articles</div>
-      <div class="posts">
-        <div class="post-cont">
+      <div class="posts" id="posts">
+        <!-- <div class="post-cont">
           <img src="../images/bgm.png" alt="egg" />
           <div class="post-title">Egg Challenge</div>
           <div class="post-t-2">
@@ -85,30 +86,62 @@
             <div><a href="./edit-article.html">EDIT</a></div>
             <div style="color: #d458ab">DELETE</div>
           </div>
-        </div>
-        <div class="post-cont">
-          <img src="../images/egg.png" alt="egg" />
-          <div class="post-title">Egg Challenge</div>
-          <div class="post-t-2">
-            Solution to the popular egg challenge that broke the internet.
-          </div>
-
-          <div class="actions">
-            <div>EDIT</div>
-            <div style="color: #d458ab">DELETE</div>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
     <div class="footer">
       <div>made by kel.</div>
       <div class="footer-f">
-        <div>posts</div>
-        <div>newsletter</div>
+        <a href="../pages/posts.html">posts</a>
+        <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+      let posts = document.getElementById("posts");
+
+      let blogs = localStorage.getItem("blogs");
+      if (blogs) {
+        blogs = JSON.parse(blogs);
+        for (let i = 0; i < blogs.length; i++) {
+          let post = document.createElement("div");
+          post.className = "post-cont";
+          let p_img = document.createElement("img");
+          p_img.src = blogs[i].image;
+          p_img.alt = "Blog Image";
+          let p_title = document.createElement("div");
+          p_title.innerHTML = blogs[i].title;
+          p_title.className = "post-title";
+          let p_content = document.createElement("div");
+          p_content.className = "post-t-2";
+          p_content.innerHTML = blogs[i].content.substring(0, 70);
+          let p_actions = document.createElement("div");
+          p_actions.className = "actions";
+          let p_ed = document.createElement("div");
+          let p_ed_a = document.createElement("a");
+          p_ed_a.href = `./edit-article.html?id=${blogs[i].id}`;
+          p_ed_a.innerHTML = "EDIT";
+          p_ed.appendChild(p_ed_a);
+          let p_del = document.createElement("div");
+          p_del.style.color = "#d458ab";
+          p_del.innerHTML = "DELETE";
+          p_del.addEventListener("click", (e) => {
+            removeArticle(blogs[i].id);
+          });
+
+          p_actions.appendChild(p_ed);
+          p_actions.appendChild(p_del);
+
+          post.appendChild(p_img);
+          post.appendChild(p_title);
+          post.appendChild(p_content);
+          post.appendChild(p_actions);
+
+          posts.appendChild(post);
+        }
+      }
+    </script>
   </body>
 </html>

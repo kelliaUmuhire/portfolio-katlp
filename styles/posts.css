@@ -57,6 +57,7 @@
 .p-post-header img {
   width: 115px;
   height: 120px;
+  margin-right: 20px;
 }
 
 .p-post-header .p-post-h {
@@ -201,6 +202,23 @@
   margin-top: 15px;
   margin-bottom: 10px;
 }
+
+.post_content_a {
+  font-size: 13px;
+  color: #ededed;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.p-post-content {
+  margin-top: 20px;
+}
+
+.date_class {
+  color: #dbdbdb;
+  font-size: 11px;
+  margin-top: 1.5px;
+  margin-left: 12px;
+}
 /* .footer {
   position: absolute;
   bottom: 0;
@@ -223,10 +241,13 @@
     margin-right: 16px;
     margin-top: 40px;
   }
-  .rate-imgs img {
-    width: 30px;
+  /* .rate-img {
+    width: 300px;
+    height: 300px;
     margin-right: 6px;
-  }
+    color: yellow !important;
+    margin-right: 100px;
+  } */
   .more-sec .posts .post-cont {
     width: 45% !important;
   }

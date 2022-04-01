@@ -129,8 +129,9 @@
   display: flex;
 }
 
-.footer-f div {
+.footer-f a {
   margin-right: 20px;
+  color: white;
 }
 
 /* End */
@@ -200,7 +201,8 @@
 
 .p_profile input {
   width: 80%;
-  height: 30px;
+  height: 40px;
+  padding: 0px 10px;
   background-color: #171221;
   border: 1px solid #211d28;
   color: #dfdfdf;
@@ -254,6 +256,17 @@
   height: 15px;
   cursor: pointer;
 }
+
+.already {
+  margin-top: 30px;
+  color: #dfdfdf;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.already a {
+  color: #d458ab;
+}
+
 @media (max-width: 600px) {
   .skills-container {
     margin-top: 5rem;

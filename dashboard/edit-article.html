@@ -71,7 +71,7 @@
       <div class="a-form" id="a_form">
         <div class="input-group">
           <div>NAME</div>
-          <input type="text" name="a_title" value="The Big Host" />
+          <input type="text" name="a_title" />
         </div>
         <div class="error-msg" id="a_title_error"></div>
         <div class="input-group" style="display: flex">
@@ -84,55 +84,21 @@
           </div>
         </div>
         <div class="editor">
-          <!-- <div class="tools">
-            <div class="t-cont">
-              <div style="border-radius: 8px 0px 0px 8px">
-                <i data-feather="bold"></i>
-              </div>
-              <div>
-                <i data-feather="italic"></i>
-              </div>
-              <div style="border-radius: 0px 8px 8px 0px">
-                <i data-feather="type"></i>
-              </div>
-            </div>
-
-            <div class="t-cont">
-              <div style="border-radius: 8px 0px 0px 8px">
-                <i data-feather="align-left"></i>
-              </div>
-              <div>
-                <i data-feather="align-center"></i>
-              </div>
-              <div style="border-radius: 0px 8px 8px 0px">
-                <i data-feather="align-right"></i>
-              </div>
-            </div>
-
-            <div class="t-cont">
-              <div style="border-radius: 8px 0px 0px 8px">
-                <i data-feather="image"></i>
-              </div>
-              <div style="border-radius: 0px 8px 8px 0px">
-                <i data-feather="link-2"></i>
-              </div>
-            </div>
-          </div> -->
           <textarea placeholder="Type something.." name="a_content">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sagittis velit, sed congue urna. Nullam ac molestie massa. Mauris a varius nunc. Nunc quis elit porta, egestas metus eget, euismod nisi. Cras laoreet lobortis efficitur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</textarea
           >
           <div class="error-msg" id="a_content_error"></div>
         </div>
 
-        <button class="c-blog-btn" onclick="saveData()">CREATE</button>
+        <button class="c-blog-btn" onclick="updateBlog()">UPDATE</button>
       </div>
     </div>
 
     <div class="footer">
       <div>made by kel.</div>
       <div class="footer-f">
-        <div>posts</div>
-        <div>newsletter</div>
+        <a href="../pages/posts.html">posts</a>
+        <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
 
@@ -145,6 +111,20 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sagittis velit
             e.target.files[0].name;
           document.getElementById("photoName").style.color = "#ededed";
         });
+
+      let blogs = localStorage.getItem("blogs");
+      if (blogs) {
+        blogs = JSON.parse(blogs);
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get("id");
+        let blog = blogs.find((x) => x.id === parseFloat(id));
+        if (blog) {
+          document.querySelector("input[name=a_title]").value = blog.title;
+          document.querySelector("textarea[name=a_content]").value =
+            blog.content;
+        }
+      }
     </script>
   </body>
 </html>

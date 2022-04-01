@@ -37,48 +37,27 @@
 
     <div class="p-post">
       <div class="p-post-header">
-        <img src="../images/egg.png" alt="egg" />
+        <img src="../images/egg.png" alt="egg" id="p-image" />
         <div class="p-post-h">
           <div class="p-post-title">Egg Challenge</div>
           <div style="color: #d2d2d2; font-size: 14px">2022-03-11</div>
         </div>
       </div>
       <div class="p-post-content">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-          cursus metus a quam sagittis gravida. Pellentesque imperdiet malesuada
-          dui, eget volutpat risus luctus non. Proin lacinia lacinia aliquet.
-          Proin scelerisque tellus urna, et dignissim nisl convallis vel.
-          Integer a pretium nisl. Integer rhoncus dolor vitae volutpat
-          consequat. Suspendisse lectus metus, ullamcorper at sapien sed,
-          pellentesque posuere nunc.
-        </p>
-        <p>
-          Donec feugiat, dolor suscipit auctor blandit, felis leo molestie
-          tellus, a vehicula risus magna ac odio. Quisque fringilla nibh ut
-          imperdiet sollicitudin. Nunc felis neque, luctus eu metus eu,
-          ultricies accumsan velit. Aliquam id ornare sem. Nunc gravida leo
-          nunc, vel volutpat purus viverra ut. Integer vulputate consectetur
-          lorem, pretium vestibulum nunc elementum eu.
-        </p>
-        <p>
-          Donec elementum vulputate mi, a pharetra orci sodales sed. Nullam eu
-          rutrum nisl. Suspendisse quam dolor, volutpat vitae egestas eget,
-          molestie vel orci.Suspendisse imperdiet felis turpis, sed tristique
-          nisi congue non. Praesent tempus est sit amet tortor tincidunt, a
-          maximus ligula ultrices.
-        </p>
+        
       </div>
     </div>
 
     <div class="rate">
       <div style="font-weight: bold">Rate it!</div>
       <div class="rate-imgs">
-        <img src="../images/emojis/love.png" alt="love" />
+        <!-- <img src="../images/emojis/love.png" alt="love" />
         <img src="../images/emojis/like.png" alt="like" />
         <img src="../images/emojis/smile.png" alt="smile.png" />
         <img src="../images/emojis/neutral.png" alt="neutral.png" />
-        <img src="../images/emojis/angry.png" alt="angry.png" />
+        <img src="../images/emojis/angry.png" alt="angry.png" /> -->
+        <ion-icon name="happy" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="likeBlog(1)"></ion-icon>
+        <ion-icon name="sad" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="likeBlog(-1)"></ion-icon>
       </div>
     </div>
 
@@ -110,10 +89,6 @@
     <div class="comments">
       <div style="font-weight: bold">Comments</div>
       <div class="add-com">
-        <!-- <div class="input-group">
-          <div>Email</div>
-          <input type="text" name="email"/>
-        </div> -->
         <div class="input-group">
           <div>Your comment</div>
           <textarea name="comment" style="height: 100px"></textarea>
@@ -122,20 +97,12 @@
         <button class="btn-send" onclick="addComment()">Add comment</button>
       </div>
       <div class="cmts">
-        <div class="cmt">
+        <!-- <div class="cmt">
           <div class="cmt-pic">BM</div>
           <div class="cmt-cont">
             <div class="cmt-h">
               <span>Bob Mary</span>
-              <span
-                style="
-                  color: #dbdbdb;
-                  font-size: 11px;
-                  margin-top: 1.5px;
-                  margin-left: 12px;
-                "
-                >2 days ago</span
-              >
+              <span class="date_class">2 days ago</span>
             </div>
             <div class="cmt-c">
               <div>
@@ -143,30 +110,7 @@
               </div>
               <ion-icon name="arrow-undo"></ion-icon>
             </div>
-          </div>
-        </div>
-        <div class="cmt">
-          <div class="cmt-pic">A</div>
-          <div class="cmt-cont">
-            <div class="cmt-h">
-              <span>Anonymous</span>
-              <span
-                style="
-                  color: #dbdbdb;
-                  font-size: 11px;
-                  margin-top: 1.5px;
-                  margin-left: 12px;
-                "
-                >2 days ago</span
-              >
-            </div>
-            <div class="cmt-c">
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gratis!
-              </div>
-              <ion-icon name="arrow-undo"></ion-icon>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -174,14 +118,60 @@
     <div class="footer">
       <div>made by kel.</div>
       <div class="footer-f">
-        <div>posts</div>
-        <div>newsletter</div>
+        <a href="./posts.html">posts</a>
+        <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script>
       checkNav();
+      const id = new URLSearchParams(window.location.search).get("id");
+      let blogs = JSON.parse(localStorage.getItem("blogs"));
+      let u = blogs.findIndex((x) => x.id === parseFloat(id));
+      if (u > -1) {
+        document.getElementsByClassName("p-post-title")[0].innerHTML =
+          blogs[u].title;
+        document.getElementsByClassName("p-post-content")[0].innerHTML =
+          blogs[u].content;
+        document.getElementById("p-image").src = blogs[u].image;
+      }
+
+      let comments = localStorage.getItem("comments");
+      if (comments) {
+        comments = JSON.parse(comments);
+        let comments_div = document.getElementsByClassName("cmts")[0];
+
+        for (let i = 0; i < comments.length; i++) {
+          let cmt_container = document.createElement("div");
+          cmt_container.className = "cmt";
+          let cmt_pic = document.createElement("div");
+          cmt_pic.className = "cmt-pic";
+          cmt_pic.innerHTML = comments[i].user.profile;
+          let cm_div = document.createElement("div");
+          cm_div.className = "cmt-cont";
+          let cm_h = document.createElement("div");
+          cm_h.className = "cmt-h";
+          let name_span = document.createElement("span");
+          name_span.innerHTML = comments[i].user.name;
+          let date_c = document.createElement("span");
+          date_c.className = "date_class";
+          date_c.innerHTML = "Posted Today";
+          cm_h.appendChild(name_span);
+          cm_h.appendChild(date_c);
+          let cmt_c = document.createElement("div");
+          cmt_c.className = "cmt-c";
+          let cmt_c_d1 = document.createElement("div");
+          cmt_c_d1.innerHTML = comments[i].comment;
+          cmt_c.appendChild(cmt_c_d1);
+
+          cm_div.appendChild(cm_h);
+          cm_div.appendChild(cmt_c);
+          cmt_container.appendChild(cmt_pic);
+          cmt_container.appendChild(cm_div);
+          comments_div.appendChild(cmt_container);
+        }
+      }
     </script>
   </body>
 </html>

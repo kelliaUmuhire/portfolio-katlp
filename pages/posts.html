@@ -42,40 +42,8 @@
       </div>
     </div>
     <div class="posts-title">RECENT POSTS</div>
-    <div class="posts">
-      <div class="post-cont">
-        <img src="../images/egg.png" alt="egg" />
-        <div class="post-title">Egg Challenge</div>
-        <div
-          style="
-            font-size: 13px;
-            color: #ededed;
-            margin-top: 15px;
-            margin-bottom: 10px;
-          "
-        >
-          Solution to the popular egg challenge that broke the internet.
-        </div>
-
-        <a href="./post.html"> CHECK IT OUT </a>
-      </div>
-      <div class="post-cont">
-        <img src="../images/bgm.png" alt="egg" />
-        <div class="post-title">Egg Challenge</div>
-        <div
-          style="
-            font-size: 13px;
-            color: #ededed;
-            margin-top: 15px;
-            margin-bottom: 10px;
-          "
-        >
-          Solution to the popular egg challenge that broke the internet.
-        </div>
-
-        <a href="./post.html"> CHECK IT OUT </a>
-      </div>
-      <div class="post-cont">
+    <div class="posts" id="posts">
+      <!-- <div class="post-cont">
         <img src="../images/bgm.png" alt="egg" />
         <div class="post-title">Egg Challenge</div>
         <div
@@ -90,17 +58,43 @@
         </div>
 
         <a> CHECK IT OUT </a>
-      </div>
+      </div> -->
     </div>
     <div class="footer">
       <div>made by kel.</div>
       <div class="footer-f">
-        <div>posts</div>
-        <div>newsletter</div>
+        <a href="./posts.html">posts</a>
+        <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
     <script>
       checkNav();
+      let posts = document.getElementById("posts");
+      let blogs = localStorage.getItem("blogs");
+      if (blogs) {
+        blogs = JSON.parse(blogs);
+        for (let i = 0; i < blogs.length; i++) {
+          let post = document.createElement("div");
+          post.className = "post-cont";
+          let p_img = document.createElement("img");
+          p_img.src = blogs[i].image;
+          p_img.alt = "Blog Image";
+          let p_title = document.createElement("div");
+          p_title.innerHTML = blogs[i].title;
+          p_title.className = "post-title";
+          let p_content = document.createElement("div");
+          p_content.className = "post_content_a";
+          p_content.innerHTML = blogs[i].content.substring(0, 60);
+          let p_check = document.createElement("a");
+          p_check.href = `./post.html?id=${blogs[i].id}`;
+          p_check.innerHTML = "CHECK IT OUT";
+          post.appendChild(p_img);
+          post.appendChild(p_title);
+          post.appendChild(p_content);
+          post.appendChild(p_check);
+          posts.appendChild(post);
+        }
+      }
     </script>
   </body>
 </html>

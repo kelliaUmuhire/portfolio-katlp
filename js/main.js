@@ -93,7 +93,7 @@ const validateContactForm = () => {
   }
 };
 
-const validateBlogForm = () => {
+const validateBlogForm = (type) => {
   let val1 = document.querySelector("input[name=a_title]").value;
   let val2 = document.querySelector("textarea[name=a_content]").value;
   let img_div = document.getElementById("photoName");
@@ -122,11 +122,13 @@ const validateBlogForm = () => {
     r_val = true;
   }
 
-  if (!document.querySelector("input[name=custom_img]").files[0]) {
-    img_div.style.color = "rgb(255, 146, 146)";
-    img_div.innerHTML = "Picture field is required";
-  } else {
-    img_div.style.color = "#ededed";
+  if (type !== "update") {
+    if (!document.querySelector("input[name=custom_img]").files[0]) {
+      img_div.style.color = "rgb(255, 146, 146)";
+      img_div.innerHTML = "Picture field is required";
+    } else {
+      img_div.style.color = "#ededed";
+    }
   }
   return r_val;
 };
@@ -140,6 +142,7 @@ const saveData = () => {
       function () {
         // convert image file to base64 string and save to localStorage
         let blog = {
+          id: Math.random(1, 10000),
           title: document.querySelector("input[name=a_title]").value,
           image: reader.result,
           content: document.querySelector("textarea[name=a_content").value,
@@ -158,6 +161,37 @@ const saveData = () => {
     if (imgPath) {
       reader.readAsDataURL(imgPath);
     }
+
+    window.location.href = "../dashboard/index.html";
+  }
+};
+
+const updateBlog = () => {
+  if (validateBlogForm("update")) {
+    const imgPath = document.querySelector("input[type=file]").files[0];
+    const id = new URLSearchParams(window.location.search).get("id");
+    let u = blogs.findIndex((x) => x.id === parseFloat(id));
+    blogs[u].title = document.querySelector("input[name=a_title]").value;
+    blogs[u].content = document.querySelector("textarea[name=a_content").value;
+
+    if (!imgPath) {
+      localStorage.setItem("blogs", JSON.stringify(blogs));
+    } else {
+      const reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        () => {
+          blogs[u].image = reader.result;
+          localStorage.setItem("blogs", JSON.stringify(blogs));
+        },
+        false
+      );
+      if (imgPath) {
+        reader.readAsDataURL(imgPath);
+      }
+    }
+
+    window.location.href = "../dashboard/index.html";
   }
 };
 
@@ -287,7 +321,7 @@ const addComment = () => {
       //add the comment
       let comments = localStorage.getItem("comments");
       if (comments) {
-        comments = JSON.stringify(comments);
+        comments = JSON.parse(comments);
         comments.push({
           id: Math.random(1, 10000),
           user: { ...JSON.parse(localStorage.getItem("auth_user")) },
@@ -303,6 +337,31 @@ const addComment = () => {
         ];
       }
       localStorage.setItem("comments", JSON.stringify(comments));
+      location.reload();
     }
+  }
+};
+
+const removeArticle = (id) => {
+  if (window.confirm("Sure you want to delete this?")) {
+    let blogs = JSON.parse(localStorage.getItem("blogs"));
+    blogs = blogs.filter((x) => x.id !== id);
+    localStorage.setItem("blogs", JSON.stringify(blogs));
+    location.reload();
+  }
+};
+
+const likeBlog = (num) => {
+  const id = new URLSearchParams(window.location.search).get("id");
+  let blogs = JSON.parse(localStorage.getItem("blogs"));
+  let u = blogs.findIndex((x) => x.id === parseFloat(id));
+
+  if (u > -1) {
+    if (blogs[u].likes) {
+      blogs[u].likes += num;
+    } else {
+      blogs[u].likes = num;
+    }
+    localStorage.setItem("blogs", JSON.stringify(blogs));
   }
 };

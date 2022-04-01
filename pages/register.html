@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/home.css" />
     <script src="../js/main.js"></script>
@@ -44,6 +44,11 @@
       <div class="h1">sign in</div>
       <div class="login-f">
         <div class="input-group">
+          <div>NAME</div>
+          <input type="title" name="u_name" />
+          <div class="error-msg" id="name_err"></div>
+        </div>
+        <div class="input-group">
           <div>EMAIL</div>
           <input type="email" name="email" />
           <div class="error-msg" id="email_err"></div>
@@ -54,8 +59,8 @@
           <div class="error-msg" id="pass_err"></div>
         </div>
       </div>
-      <button onclick="loginFunc()">
-        LOGIN
+      <button onclick="registerFunc()">
+        Sign Up
         <!-- <a href="../dashboard/index.html">LOGIN</a> -->
       </button>
     </div>

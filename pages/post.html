@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/home.css" />
     <link rel="stylesheet" href="../styles/posts.css" />
+    <script src="../js/main.js"></script>
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
   <body>
@@ -109,15 +110,16 @@
     <div class="comments">
       <div style="font-weight: bold">Comments</div>
       <div class="add-com">
-        <div class="input-group">
+        <!-- <div class="input-group">
           <div>Email</div>
-          <input type="text" />
-        </div>
+          <input type="text" name="email"/>
+        </div> -->
         <div class="input-group">
           <div>Your comment</div>
-          <textarea name="" style="height: 100px"></textarea>
+          <textarea name="comment" style="height: 100px"></textarea>
+          <div class="error-msg" id="comment_err"></div>
         </div>
-        <button class="btn-send">Add comment</button>
+        <button class="btn-send" onclick="addComment()">Add comment</button>
       </div>
       <div class="cmts">
         <div class="cmt">

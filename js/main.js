@@ -93,3 +93,79 @@ const saveData = () => {
     }
   }
 };
+
+const loginFunc = () => {
+  let email = document.querySelector("input[name=email").value;
+  let password = document.querySelector("input[name=password").value;
+
+  if (email.length === 0) {
+    document.getElementById("email_err").innerHTML = "Email can't be empty";
+  } else if (!email.includes("@") || !email.includes(".")) {
+    document.getElementById("email_err").innerHTML = "Email is not valid";
+  } else {
+    document.getElementById("email_err").innerHTML = null;
+  }
+
+  if (password.length === 0) {
+    document.getElementById("pass_err").innerHTML = "Password can't be empty";
+  } else if (password.length < 6) {
+    document.getElementById("pass_err").innerHTML =
+      "Password lenght must not be less than 6";
+  } else if (password.length > 30) {
+    document.getElementById("pass_err").innerHTML = "Password lenght too long";
+  } else {
+    document.getElementById("pass_err").innerHTML = null;
+  }
+
+  let users = localStorage.getItem("users");
+  if (users) {
+    users = JSON.parse(users);
+    let user = users.find((x) => x.email === email);
+    if (user) {
+      localStorage.setItem("auth_user", JSON.stringify(user));
+      if (user.role === "admin") {
+        window.location.href = "../dashboard/index.html";
+      } else {
+        window.location.href = "../pages/posts.html";
+      }
+    }
+  }
+
+  // localStorage.setItem("auth_user", JSON.stringify({ email }));
+};
+
+const addComment = () => {
+  let comment = document.querySelector("textarea[name=comment]").value;
+  if (comment.length === 0) {
+    document.getElementById("comment_err").innerHTML = "Comment can't be empty";
+  } else if (comment.length < 2) {
+    document.getElementById("comment_err").innerHTML = "Comment is too short";
+  } else if (comment.length > 300) {
+    document.getElementById("comment_err").innerHTML = "Comment is too long";
+  } else {
+    document.getElementById("comment_err").innerHTML = null;
+    if (!localStorage.getItem("auth_user")) {
+      window.location.href = "../pages/register.html";
+    } else {
+      //add the comment
+      let comments = localStorage.getItem("comments");
+      if (comments) {
+        comments = JSON.stringify(comments);
+        comments.push({
+          id: Math.random(1, 10000),
+          user: { ...JSON.parse(localStorage.getItem("auth_user")) },
+          comment,
+        });
+      } else {
+        comments = [
+          {
+            id: Math.random(1, 10000),
+            user: { ...JSON.parse(localStorage.getItem("auth_user")) },
+            comment,
+          },
+        ];
+      }
+      localStorage.setItem("comments", JSON.stringify(comments));
+    }
+  }
+};

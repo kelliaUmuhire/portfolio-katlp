@@ -149,6 +149,7 @@
   border-radius: 2px;
   position: absolute;
   right: 70%;
+  cursor: pointer;
 }
 
 .cmts {

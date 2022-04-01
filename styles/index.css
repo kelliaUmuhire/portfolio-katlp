@@ -25,7 +25,7 @@ input {
 }
 
 .error-msg {
-  color: rgb(255, 146, 146);
+  color: rgb(255, 146, 146) !important;
   font-size: 12px;
   margin-top: 3px;
 }

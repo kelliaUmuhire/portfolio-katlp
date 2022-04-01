@@ -33,33 +33,37 @@ const validateContactForm = () => {
 const validateBlogForm = () => {
   let val1 = document.querySelector("input[name=a_title]").value;
   let val2 = document.querySelector("textarea[name=a_content]").value;
+  let img_div = document.getElementById("photoName");
 
-  let r_val = true;
+  let r_val = false;
 
   if (val1.length === 0) {
     document.getElementById("a_title_error").innerHTML = "Name can't be empty";
-    r_val = false;
   } else if (val1.length > 100) {
     document.getElementById("a_title_error").innerHTML =
       "Name lenght is too long";
-    r_val = false;
   } else {
     document.getElementById("a_title_error").innerHTML = null;
+    r_val = true;
   }
 
   if (val2.length === 0) {
     document.getElementById("a_content_error").innerHTML =
       "Content can't be empty";
-    r_val = false;
   } else if (val2.length > 1000) {
     document.getElementById("a_content_error").innerHTML =
       "Content lenght is too long";
-    r_val = false;
   } else {
     document.getElementById("a_content_error").innerHTML = null;
+    r_val = true;
   }
 
-  //validate pic
+  if (!document.querySelector("input[name=custom_img]").files[0]) {
+    img_div.style.color = "rgb(255, 146, 146)";
+    img_div.innerHTML = "Picture field is required";
+  } else {
+    img_div.style.color = "#ededed";
+  }
 
   return r_val;
 };
@@ -75,7 +79,7 @@ const saveData = () => {
         let blog = {
           title: document.querySelector("input[name=a_title]").value,
           image: reader.result,
-          content: document.querySelector("textarea[name=a_content"),
+          content: document.querySelector("textarea[name=a_content").value,
         };
         let blogs = localStorage.getItem("blogs");
         if (!blogs) {
@@ -97,25 +101,35 @@ const saveData = () => {
 const loginFunc = () => {
   let email = document.querySelector("input[name=email").value;
   let password = document.querySelector("input[name=password").value;
+  let valid = false;
 
   if (email.length === 0) {
     document.getElementById("email_err").innerHTML = "Email can't be empty";
+    valid = false;
   } else if (!email.includes("@") || !email.includes(".")) {
     document.getElementById("email_err").innerHTML = "Email is not valid";
+    valid = false;
   } else {
     document.getElementById("email_err").innerHTML = null;
+    valid = true;
   }
 
   if (password.length === 0) {
     document.getElementById("pass_err").innerHTML = "Password can't be empty";
+    valid = false;
   } else if (password.length < 6) {
     document.getElementById("pass_err").innerHTML =
       "Password lenght must not be less than 6";
+    valid = false;
   } else if (password.length > 30) {
     document.getElementById("pass_err").innerHTML = "Password lenght too long";
+    valid = false;
   } else {
     document.getElementById("pass_err").innerHTML = null;
+    valid = true;
   }
+
+  if (!valid) return;
 
   let users = localStorage.getItem("users");
   if (users) {

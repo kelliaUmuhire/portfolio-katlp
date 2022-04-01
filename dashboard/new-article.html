@@ -30,12 +30,13 @@
       </div>
       <div class="nav-links">
         <a href="../index.html">Home</a>
-        <a href="#">Logout</a>
+        <a href="../pages/profile.html">Profile</a>
+        <a href="../index.html">Logout</a>
       </div>
     </div>
 
     <div class="dash-nav">
-      <div class="add-article">
+      <div class="add-article add-1">
         <ion-icon name="document"></ion-icon>
         <div style="margin-left: 4px">
           <a href="./index.html">Articles</a>
@@ -60,7 +61,7 @@
       <div class="add-article">
         <ion-icon name="stats-chart"></ion-icon>
         <div style="margin-left: 4px">
-          <a href="./index.html">Stats</a>
+          <a href="./stats.html">Stats</a>
         </div>
       </div>
     </div>
@@ -73,14 +74,12 @@
           <input type="text" name="a_title" />
         </div>
         <div class="error-msg" id="a_title_error"></div>
-        <div class="input-group">
-          <!-- <div>CHOOSE PHOTO</div>
-          <input type="file"/> -->
+        <div class="input-group" style="display: flex">
           <label class="choose-pic">
             <input type="file" name="custom_img" style="display: none" />
             CHOOSE PHOTO
-            <!-- <ion-icon name="image-outline"></ion-icon> -->
           </label>
+          <div style="margin-left: 20px; margin-top: 8px" id="photoName"></div>
         </div>
         <div class="editor">
           <!-- <div class="tools">
@@ -135,14 +134,13 @@
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script>
-      // document
-      //   .querySelector("input[name=custom_img]")
-      //   .addEventListener("change", (e) => {
-      //     localStorage.setItem(
-      //       "blog_temp_img",
-      //       JSON.stringify(e.target.files[0])
-      //     );
-      //   });
+      document
+        .querySelector("input[name=custom_img]")
+        .addEventListener("change", (e) => {
+          document.getElementById("photoName").innerHTML =
+            e.target.files[0].name;
+          document.getElementById("photoName").style.color = "#ededed";
+        });
     </script>
   </body>
 </html>

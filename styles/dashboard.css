@@ -172,14 +172,14 @@
 
 /* User */
 .users {
-  margin: 50px 40px;
+  margin: 70px 40px;
 }
 .user {
   display: flex;
   margin-top: 10px;
 }
 
-.user .profile {
+.profile {
   background-color: #0c314b;
   padding: 8px 5px;
   display: flex;
@@ -200,6 +200,10 @@
   font-size: 15px;
 }
 
+.nav-links a {
+  font-size: 13px !important;
+  margin-top: 3px;
+}
 /* .footer {
   position: absolute;
   width: 100%;
@@ -224,5 +228,11 @@
   }
   .users {
     margin: 50px 20px;
+  }
+  .dash-nav .add-article {
+    margin-left: 20px;
+  }
+  .add-1 {
+    margin-left: 2px !important;
   }
 }

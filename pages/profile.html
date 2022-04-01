@@ -33,12 +33,34 @@
 
       <div class="nav-links">
         <a href="../index.html">Home</a>
-        <a href="../pages/profile.html">Profile</a>
+        <a href="../pages/profile.html" style="color: #d458ab">Profile</a>
         <a href="../index.html">Logout</a>
       </div>
     </div>
 
-    <div>Profile</div>
+    <div class="p_profile">
+      <!-- <div class="profile p_pro">BM</div> -->
+      <div class="p_h1">Update Your Profile</div>
+      <!-- <div class="login-f"> -->
+      <div class="input-group">
+        <div class="field_title">NAME</div>
+        <input type="title" name="p_name" />
+        <div class="error-msg" id="name_err"></div>
+      </div>
+      <div class="input-group">
+        <div class="field_title">EMAIL</div>
+        <input type="email" name="p_email" readonly />
+        <div class="error-msg" id="email_err"></div>
+      </div>
+      <div class="input-group p_pass">
+        <div class="field_title">PASSWORD</div>
+        <input type="password" name="p_password" />
+        <div class="error-msg" id="pass_err"></div>
+        <ion-icon name="eye" onclick="showPassword()"></ion-icon>
+      </div>
+      <div class="up-btn" onclick="updateProfile()">Update</div>
+      <!-- </div> -->
+    </div>
 
     <div class="footer">
       <div>made by kel.</div>
@@ -47,5 +69,9 @@
         <div>newsletter</div>
       </div>
     </div>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script>
+      fillProfile();
+    </script>
   </body>
 </html>

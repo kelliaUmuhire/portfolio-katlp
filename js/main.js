@@ -17,6 +17,50 @@ function checkNav() {
   }
 }
 
+/** Profile */
+function fillProfile() {
+  let user = localStorage.getItem("auth_user");
+  if (user) {
+    user = JSON.parse(user);
+    document.querySelector("input[name=p_name]").value = user.name;
+    document.querySelector("input[name=p_email]").value = user.email;
+    document.querySelector("input[name=p_password]").value = user.password
+      ? user.password
+      : "123456";
+  }
+}
+
+function showPassword() {
+  let p_password = document.querySelector("input[name=p_password]");
+  if (p_password.type === "text") {
+    p_password.type = "password";
+  }
+  if (p_password.type === "password") p_password.type = "text";
+}
+
+function updateProfile() {
+  if (!validateAuthForms("profile")) return;
+
+  let users = localStorage.getItem("users");
+  if (users) {
+    users = JSON.parse(users);
+    let u = users.findIndex(
+      (u) => u.email === document.querySelector("input[name=p_email]").value
+    );
+    if (u > -1) {
+      let uname = document.querySelector("input[name=p_name]").value;
+      let profile = uname[0];
+      if (uname.split(" ")[1]) profile = profile.concat(uname.split(" ")[1][0]);
+      users[u].name = uname;
+      users[u].password = document.querySelector(
+        "input[name=p_password]"
+      ).value;
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  }
+}
+/****/
+
 const validateContactForm = () => {
   let c_form_el = document
     .getElementById("contactForm")
@@ -84,7 +128,6 @@ const validateBlogForm = () => {
   } else {
     img_div.style.color = "#ededed";
   }
-
   return r_val;
 };
 
@@ -119,8 +162,14 @@ const saveData = () => {
 };
 
 const validateAuthForms = (type) => {
-  let email = document.querySelector("input[name=email").value;
-  let password = document.querySelector("input[name=password").value;
+  let email =
+    type === "profile"
+      ? document.querySelector("input[name=p_email").value
+      : document.querySelector("input[name=email").value;
+  let password =
+    type === "profile"
+      ? document.querySelector("input[name=p_password").value
+      : document.querySelector("input[name=password").value;
   let valid = true;
 
   if (email.length === 0) {
@@ -151,8 +200,11 @@ const validateAuthForms = (type) => {
     valid = true;
   }
 
-  if (type === "up") {
-    let name = document.querySelector("input[name=u_name").value;
+  if (type === "up" || type === "profile") {
+    let name =
+      type === "profile"
+        ? document.querySelector("input[name=p_name").value
+        : document.querySelector("input[name=u_name").value;
     if (name.length === 0) {
       document.getElementById("name_err").innerHTML =
         "Name field can't be empty";
@@ -189,6 +241,8 @@ const loginFunc = () => {
       } else {
         window.location.href = "../pages/posts.html";
       }
+    } else {
+      //add error message
     }
   }
 };
@@ -203,6 +257,7 @@ const registerFunc = () => {
     name: uname,
     email: document.querySelector("input[name=email").value,
     profile,
+    password: document.querySelector("input[name=password").value,
   };
   if (users) {
     users = JSON.parse(users);

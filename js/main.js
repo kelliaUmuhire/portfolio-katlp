@@ -27,6 +27,9 @@ function fillProfile() {
     document.querySelector("input[name=p_password]").value = user.password
       ? user.password
       : "123456";
+    if (user.role === "admin") {
+      document.getElementById("home_link").href = "../dashboard/index.html";
+    }
   }
 }
 
@@ -56,6 +59,9 @@ function updateProfile() {
         "input[name=p_password]"
       ).value;
       localStorage.setItem("users", JSON.stringify(users));
+      if (users[u].role === "admin") {
+        window.location.href = "../dashboard/index.html";
+      } else window.location.href = "../pages/posts.html";
     }
   }
 }

@@ -36,7 +36,7 @@
         </label>
       </div>
       <div class="nav-links">
-        <a href="../index.html">Home</a>
+        <a href="./index.html">Home</a>
         <a href="../pages/profile.html">Profile</a>
         <a href="../index.html">Logout</a>
       </div>
@@ -95,19 +95,24 @@
         users = JSON.parse(users);
         let d_users = document.getElementById("users");
         for (let i = 0; i < users.length; i++) {
-          let d_user = document.createElement("div");
-          d_user.className = "user";
+          if (
+            users[i].email !==
+            JSON.parse(localStorage.getItem("auth_user")).email
+          ) {
+            let d_user = document.createElement("div");
+            d_user.className = "user";
 
-          let d_profile = document.createElement("div");
-          d_profile.className = "profile";
-          d_profile.innerHTML = users[i].profile;
-          let d_name = document.createElement("div");
-          d_name.className = "name";
-          d_name.innerHTML = users[i].name;
+            let d_profile = document.createElement("div");
+            d_profile.className = "profile";
+            d_profile.innerHTML = users[i].profile;
+            let d_name = document.createElement("div");
+            d_name.className = "name";
+            d_name.innerHTML = users[i].name;
 
-          d_user.appendChild(d_profile);
-          d_user.appendChild(d_name);
-          d_users.appendChild(d_user);
+            d_user.appendChild(d_profile);
+            d_user.appendChild(d_name);
+            d_users.appendChild(d_user);
+          }
         }
       }
       //    else {

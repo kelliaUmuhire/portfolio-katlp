@@ -223,9 +223,9 @@ textarea {
   margin-top: 20px;
 }
 
-.projs .project + .proj-disc {
+/* .projs .project + .proj-disc {
   display: block;
-}
+} */
 .projs .project img {
   width: 100%;
   height: 100%;
@@ -247,7 +247,7 @@ textarea {
 .proj-disc {
   background-color: #211d28cc;
   border-radius: 10px;
-  display: none;
+  /* display: none; */
 }
 
 .proj-h {
@@ -259,13 +259,17 @@ textarea {
 
 .proj-cont {
   font-family: "Open Sans", sans-serif;
-  margin-top: 30px;
+  margin-top: 33px;
   font-size: 14px;
 }
 
 .proj-i {
-  /* position: absolute; */
+  position: absolute;
   color: #961c6e;
+  bottom: 10px;
+  width: 20px;
+  height: 20px;
+  right: 20px;
 }
 
 .posts {

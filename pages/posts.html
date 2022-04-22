@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/posts.css" />
     <!-- <link rel="stylesheet" href="style.css" /> -->
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
     <style>
       .footer {
         position: absolute;
@@ -67,26 +68,25 @@
         <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       checkNav();
-      let posts = document.getElementById("posts");
-      let blogs = localStorage.getItem("blogs");
-      if (blogs) {
-        blogs = JSON.parse(blogs);
-        for (let i = 0; i < blogs.length; i++) {
+      getArticles(true, "any").then((res) => {
+        let posts = document.getElementById("posts");
+        for (let i = 0; i < res.data.length; i++) {
           let post = document.createElement("div");
           post.className = "post-cont";
           let p_img = document.createElement("img");
-          p_img.src = blogs[i].image;
+          p_img.src = res.data[i].picture;
           p_img.alt = "Blog Image";
           let p_title = document.createElement("div");
-          p_title.innerHTML = blogs[i].title;
+          p_title.innerHTML = res.data[i].title;
           p_title.className = "post-title";
           let p_content = document.createElement("div");
           p_content.className = "post_content_a";
-          p_content.innerHTML = blogs[i].content.substring(0, 60);
+          p_content.innerHTML = res.data[i].content.substring(0, 60);
           let p_check = document.createElement("a");
-          p_check.href = `./post.html?id=${blogs[i].id}`;
+          p_check.href = `./post.html?id=${res.data[i]._id}`;
           p_check.innerHTML = "CHECK IT OUT";
           post.appendChild(p_img);
           post.appendChild(p_title);
@@ -94,7 +94,7 @@
           post.appendChild(p_check);
           posts.appendChild(post);
         }
-      }
+      });
     </script>
   </body>
 </html>

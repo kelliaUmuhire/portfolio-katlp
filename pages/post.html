@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/home.css" />
     <link rel="stylesheet" href="../styles/posts.css" />
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
   <body>
@@ -39,8 +40,8 @@
       <div class="p-post-header">
         <img src="../images/egg.png" alt="egg" id="p-image" />
         <div class="p-post-h">
-          <div class="p-post-title">Egg Challenge</div>
-          <div style="color: #d2d2d2; font-size: 14px">2022-03-11</div>
+          <div class="p-post-title"></div>
+          <div style="color: #d2d2d2; font-size: 14px" class="p-post-doc"></div>
         </div>
       </div>
       <div class="p-post-content">
@@ -51,17 +52,13 @@
     <div class="rate">
       <div style="font-weight: bold">Rate it!</div>
       <div class="rate-imgs">
-        <!-- <img src="../images/emojis/love.png" alt="love" />
-        <img src="../images/emojis/like.png" alt="like" />
-        <img src="../images/emojis/smile.png" alt="smile.png" />
-        <img src="../images/emojis/neutral.png" alt="neutral.png" />
-        <img src="../images/emojis/angry.png" alt="angry.png" /> -->
-        <ion-icon name="happy" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="likeBlog(1)"></ion-icon>
-        <ion-icon name="sad" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="likeBlog(-1)"></ion-icon>
+        <ion-icon name="happy" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="addLike(1)"></ion-icon>
+        <ion-icon name="sad" style="width: 25px;height: 25px;color: rgb(255, 255, 24);margin-top: 10px;cursor: pointer;" onclick="addLike(-1)"></ion-icon>
       </div>
+      <div id="rate_msg"></div>
     </div>
 
-    <div class="more-sec">
+    <!-- <div class="more-sec">
       <div class="more">
         <div style="font-weight: bold">More like Egg Challenge</div>
         <ion-icon name="chevron-down-outline"></ion-icon>
@@ -84,7 +81,7 @@
           <a> CHECK IT OUT </a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="comments">
       <div style="font-weight: bold">Comments</div>
@@ -124,54 +121,10 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       checkNav();
-      const id = new URLSearchParams(window.location.search).get("id");
-      let blogs = JSON.parse(localStorage.getItem("blogs"));
-      let u = blogs.findIndex((x) => x.id === parseFloat(id));
-      if (u > -1) {
-        document.getElementsByClassName("p-post-title")[0].innerHTML =
-          blogs[u].title;
-        document.getElementsByClassName("p-post-content")[0].innerHTML =
-          blogs[u].content;
-        document.getElementById("p-image").src = blogs[u].image;
-      }
-
-      let comments = localStorage.getItem("comments");
-      if (comments) {
-        comments = JSON.parse(comments);
-        let comments_div = document.getElementsByClassName("cmts")[0];
-
-        for (let i = 0; i < comments.length; i++) {
-          let cmt_container = document.createElement("div");
-          cmt_container.className = "cmt";
-          let cmt_pic = document.createElement("div");
-          cmt_pic.className = "cmt-pic";
-          cmt_pic.innerHTML = comments[i].user.profile;
-          let cm_div = document.createElement("div");
-          cm_div.className = "cmt-cont";
-          let cm_h = document.createElement("div");
-          cm_h.className = "cmt-h";
-          let name_span = document.createElement("span");
-          name_span.innerHTML = comments[i].user.name;
-          let date_c = document.createElement("span");
-          date_c.className = "date_class";
-          date_c.innerHTML = "Posted Today";
-          cm_h.appendChild(name_span);
-          cm_h.appendChild(date_c);
-          let cmt_c = document.createElement("div");
-          cmt_c.className = "cmt-c";
-          let cmt_c_d1 = document.createElement("div");
-          cmt_c_d1.innerHTML = comments[i].comment;
-          cmt_c.appendChild(cmt_c_d1);
-
-          cm_div.appendChild(cm_h);
-          cm_div.appendChild(cmt_c);
-          cmt_container.appendChild(cmt_pic);
-          cmt_container.appendChild(cm_div);
-          comments_div.appendChild(cmt_container);
-        }
-      }
+      getArticle()
     </script>
   </body>
 </html>

@@ -14,6 +14,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
   </head>
   <body>
     <div class="nav">
@@ -79,15 +80,16 @@
             <input type="file" name="custom_img" style="display: none" />
             CHOOSE PHOTO
           </label>
-          <div style="margin-left: 20px; margin-top: 8px" id="photoName">
-            imgapic.png
-          </div>
+          <div style="margin-left: 20px; margin-top: 8px" id="photoName"></div>
         </div>
         <div class="editor">
-          <textarea placeholder="Type something.." name="a_content">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sagittis velit, sed congue urna. Nullam ac molestie massa. Mauris a varius nunc. Nunc quis elit porta, egestas metus eget, euismod nisi. Cras laoreet lobortis efficitur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;</textarea
-          >
+          <textarea placeholder="Type something.." name="a_content"></textarea>
           <div class="error-msg" id="a_content_error"></div>
+        </div>
+
+        <div>
+          <input type="checkbox" name="isPublished" />
+          Publish
         </div>
 
         <button class="c-blog-btn" onclick="updateBlog()">UPDATE</button>
@@ -103,6 +105,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sagittis velit
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       document
         .querySelector("input[name=custom_img]")
@@ -112,19 +115,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu sagittis velit
           document.getElementById("photoName").style.color = "#ededed";
         });
 
-      let blogs = localStorage.getItem("blogs");
-      if (blogs) {
-        blogs = JSON.parse(blogs);
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const id = urlParams.get("id");
-        let blog = blogs.find((x) => x.id === parseFloat(id));
-        if (blog) {
-          document.querySelector("input[name=a_title]").value = blog.title;
-          document.querySelector("textarea[name=a_content]").value =
-            blog.content;
-        }
-      }
+      getArticle(true).then((res) => {
+        document.querySelector("input[name=a_title]").value = res.data.title;
+        document.querySelector("textarea[name=a_content]").value =
+          res.data.content;
+        document.getElementById("photoName").innerHTML =
+          res.data.picture.split("/")[4];
+        document.querySelector("input[name=isPublished]").checked =
+          res.data.published;
+      });
     </script>
   </body>
 </html>

@@ -14,6 +14,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
     <style>
       .footer {
         position: absolute;
@@ -89,39 +90,9 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      let users = localStorage.getItem("users");
-      if (users) {
-        users = JSON.parse(users);
-        let d_users = document.getElementById("users");
-        for (let i = 0; i < users.length; i++) {
-          if (
-            users[i].email !==
-            JSON.parse(localStorage.getItem("auth_user")).email
-          ) {
-            let d_user = document.createElement("div");
-            d_user.className = "user";
-
-            let d_profile = document.createElement("div");
-            d_profile.className = "profile";
-            d_profile.innerHTML = users[i].profile;
-            let d_name = document.createElement("div");
-            d_name.className = "name";
-            d_name.innerHTML = users[i].name;
-
-            d_user.appendChild(d_profile);
-            d_user.appendChild(d_name);
-            d_users.appendChild(d_user);
-          }
-        }
-      }
-      //    else {
-      //     let users = [
-      //       { name: "Alan Walker", profile: "AW" },
-      //       { name: "Boby Annro", profile: "BA" },
-      //     ];
-      //     localStorage.setItem("users", JSON.stringify(users));
-      //   }
+      getUsers();
     </script>
   </body>
 </html>

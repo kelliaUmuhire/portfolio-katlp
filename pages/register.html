@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/index.css" />
     <link rel="stylesheet" href="../styles/home.css" />
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
     <style>
       .footer {
         position: absolute;
@@ -59,10 +60,7 @@
           <div class="error-msg" id="pass_err"></div>
         </div>
       </div>
-      <button onclick="registerFunc()">
-        Sign Up
-        <!-- <a href="../dashboard/index.html">LOGIN</a> -->
-      </button>
+      <button onclick="register()">Sign Up</button>
       <div class="already">
         already have an account? <a href="./login.html">Sign in</a>
       </div>
@@ -75,5 +73,7 @@
         <a href="../index.html#newsletter">newsletter</a>
       </div>
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

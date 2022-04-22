@@ -1,6 +1,6 @@
 function checkNav() {
   let nav_links = document.getElementsByClassName("nav-links")[0];
-  if (localStorage.getItem("auth_user")) {
+  if (localStorage.getItem("authToken")) {
     nav_links.innerHTML = "";
     let a1 = document.createElement("a");
     a1.innerHTML = "Home";
@@ -10,7 +10,8 @@ function checkNav() {
     a2.href = "./profile.html";
     let a3 = document.createElement("a");
     a3.innerHTML = "Log out";
-    a3.href = "../index.html";
+    // a3.href = "../index.html";
+    a3.addEventListener("click", console.log("clicked"));
     nav_links.appendChild(a1);
     nav_links.appendChild(a2);
     nav_links.appendChild(a3);
@@ -19,18 +20,16 @@ function checkNav() {
 
 /** Profile */
 function fillProfile() {
-  let user = localStorage.getItem("auth_user");
-  if (user) {
-    user = JSON.parse(user);
-    document.querySelector("input[name=p_name]").value = user.name;
-    document.querySelector("input[name=p_email]").value = user.email;
-    document.querySelector("input[name=p_password]").value = user.password
-      ? user.password
-      : "123456";
-    if (user.role === "admin") {
+  getUser().then((res) => {
+    document.querySelector("input[name=p_name]").value = res.data.name;
+    document.querySelector("input[name=p_email]").value = res.data.email;
+    // document.querySelector("input[name=p_password]").value = res.data.password
+    //   ? res.data.password
+    //   : "123456";
+    if (res.data.role === "admin") {
       document.getElementById("home_link").href = "../dashboard/index.html";
     }
-  }
+  });
 }
 
 function showPassword() {
@@ -44,26 +43,21 @@ function showPassword() {
 function updateProfile() {
   if (!validateAuthForms("profile")) return;
 
-  let users = localStorage.getItem("users");
-  if (users) {
-    users = JSON.parse(users);
-    let u = users.findIndex(
-      (u) => u.email === document.querySelector("input[name=p_email]").value
-    );
-    if (u > -1) {
-      let uname = document.querySelector("input[name=p_name]").value;
-      let profile = uname[0];
-      if (uname.split(" ")[1]) profile = profile.concat(uname.split(" ")[1][0]);
-      users[u].name = uname;
-      users[u].password = document.querySelector(
-        "input[name=p_password]"
-      ).value;
-      localStorage.setItem("users", JSON.stringify(users));
-      if (users[u].role === "admin") {
-        window.location.href = "../dashboard/index.html";
-      } else window.location.href = "../pages/posts.html";
-    }
-  }
+  let opass = document.querySelector("input[name=old_p_password]").value;
+  let npass = document.querySelector("input[name=p_password]").value;
+  let name = document.querySelector("input[name=p_name]").value;
+
+  if (opass && npass) {
+    comparePassword(opass)
+      .then((res) => {
+        if ((res.data.message = "ok")) changeProfile({ password: npass, name });
+      })
+      .catch(
+        (err) =>
+          (document.getElementById("old_password_error").innerHTML =
+            err.response.data.message)
+      );
+  } else changeProfile({ name });
 }
 /****/
 
@@ -120,7 +114,7 @@ const validateBlogForm = (type) => {
   if (val2.length === 0) {
     document.getElementById("a_content_error").innerHTML =
       "Content field can't be empty";
-  } else if (val2.length > 1000) {
+  } else if (val2.length > 30000) {
     document.getElementById("a_content_error").innerHTML =
       "Content lenght is too long";
   } else {
@@ -139,77 +133,15 @@ const validateBlogForm = (type) => {
   return r_val;
 };
 
-const saveData = () => {
-  if (validateBlogForm()) {
-    const imgPath = document.querySelector("input[type=file]").files[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      function () {
-        // convert image file to base64 string and save to localStorage
-        let blog = {
-          id: Math.random(1, 10000),
-          title: document.querySelector("input[name=a_title]").value,
-          image: reader.result,
-          content: document.querySelector("textarea[name=a_content").value,
-        };
-        let blogs = localStorage.getItem("blogs");
-        if (!blogs) {
-          blogs = [blog];
-        } else {
-          blogs = JSON.parse(blogs);
-          blogs.push(blog);
-        }
-        localStorage.setItem("blogs", JSON.stringify(blogs));
-      },
-      false
-    );
-    if (imgPath) {
-      reader.readAsDataURL(imgPath);
-    }
-
-    window.location.href = "../dashboard/index.html";
-  }
-};
-
-const updateBlog = () => {
-  if (validateBlogForm("update")) {
-    const imgPath = document.querySelector("input[type=file]").files[0];
-    const id = new URLSearchParams(window.location.search).get("id");
-    let u = blogs.findIndex((x) => x.id === parseFloat(id));
-    blogs[u].title = document.querySelector("input[name=a_title]").value;
-    blogs[u].content = document.querySelector("textarea[name=a_content").value;
-
-    if (!imgPath) {
-      localStorage.setItem("blogs", JSON.stringify(blogs));
-    } else {
-      const reader = new FileReader();
-      reader.addEventListener(
-        "load",
-        () => {
-          blogs[u].image = reader.result;
-          localStorage.setItem("blogs", JSON.stringify(blogs));
-        },
-        false
-      );
-      if (imgPath) {
-        reader.readAsDataURL(imgPath);
-      }
-    }
-
-    window.location.href = "../dashboard/index.html";
-  }
-};
-
 const validateAuthForms = (type) => {
   let email =
     type === "profile"
       ? document.querySelector("input[name=p_email").value
       : document.querySelector("input[name=email").value;
   let password =
-    type === "profile"
-      ? document.querySelector("input[name=p_password").value
-      : document.querySelector("input[name=password").value;
+    type !== "profile"
+      ? document.querySelector("input[name=password").value
+      : null;
   let valid = true;
 
   if (email.length === 0) {
@@ -224,20 +156,23 @@ const validateAuthForms = (type) => {
     valid = true;
   }
 
-  if (password.length === 0) {
-    document.getElementById("pass_err").innerHTML =
-      "Password field can't be empty";
-    valid = false;
-  } else if (password.length < 6) {
-    document.getElementById("pass_err").innerHTML =
-      "Password lenght must not be less than 6";
-    valid = false;
-  } else if (password.length > 30) {
-    document.getElementById("pass_err").innerHTML = "Password lenght too long";
-    valid = false;
-  } else {
-    document.getElementById("pass_err").innerHTML = null;
-    valid = true;
+  if (type !== "profile") {
+    if (password.length === 0) {
+      document.getElementById("pass_err").innerHTML =
+        "Password field can't be empty";
+      valid = false;
+    } else if (password.length < 6) {
+      document.getElementById("pass_err").innerHTML =
+        "Password lenght must not be less than 6";
+      valid = false;
+    } else if (password.length > 30) {
+      document.getElementById("pass_err").innerHTML =
+        "Password lenght too long";
+      valid = false;
+    } else {
+      document.getElementById("pass_err").innerHTML = null;
+      valid = true;
+    }
   }
 
   if (type === "up" || type === "profile") {
@@ -265,51 +200,6 @@ const validateAuthForms = (type) => {
   return valid;
 };
 
-const loginFunc = () => {
-  let email = document.querySelector("input[name=email").value;
-
-  if (!validateAuthForms("in")) return;
-
-  let users = localStorage.getItem("users");
-  if (users) {
-    users = JSON.parse(users);
-    let user = users.find((x) => x.email === email);
-    if (user) {
-      localStorage.setItem("auth_user", JSON.stringify(user));
-      if (user.role === "admin") {
-        window.location.href = "../dashboard/index.html";
-      } else {
-        window.location.href = "../pages/posts.html";
-      }
-    } else {
-      //add error message
-    }
-  }
-};
-
-const registerFunc = () => {
-  if (!validateAuthForms("up")) return;
-  let users = localStorage.getItem("users");
-  let uname = document.querySelector("input[name=u_name").value;
-  let profile = uname[0];
-  if (uname.split(" ")[1]) profile = profile.concat(uname.split(" ")[1][0]);
-  let user = {
-    name: uname,
-    email: document.querySelector("input[name=email").value,
-    profile,
-    password: document.querySelector("input[name=password").value,
-  };
-  if (users) {
-    users = JSON.parse(users);
-    users.push(user);
-  } else {
-    users = [user];
-  }
-  localStorage.setItem("users", JSON.stringify(users));
-  localStorage.setItem("auth_user", JSON.stringify(user));
-  window.location.href = "../pages/posts.html";
-};
-
 const addComment = () => {
   let comment = document.querySelector("textarea[name=comment]").value;
   if (comment.length === 0) {
@@ -321,53 +211,76 @@ const addComment = () => {
     document.getElementById("comment_err").innerHTML = "Comment is too long";
   } else {
     document.getElementById("comment_err").innerHTML = null;
-    if (!localStorage.getItem("auth_user")) {
-      window.location.href = "../pages/register.html";
+    if (!localStorage.getItem("authToken")) {
+      window.location.href = "../pages/login.html";
     } else {
-      //add the comment
-      let comments = localStorage.getItem("comments");
-      if (comments) {
-        comments = JSON.parse(comments);
-        comments.push({
-          id: Math.random(1, 10000),
-          user: { ...JSON.parse(localStorage.getItem("auth_user")) },
-          comment,
-        });
-      } else {
-        comments = [
-          {
-            id: Math.random(1, 10000),
-            user: { ...JSON.parse(localStorage.getItem("auth_user")) },
-            comment,
-          },
-        ];
-      }
-      localStorage.setItem("comments", JSON.stringify(comments));
-      location.reload();
+      let articleId = new URLSearchParams(window.location.search).get("id");
+      sendComment(articleId, comment);
     }
   }
 };
 
-const removeArticle = (id) => {
-  if (window.confirm("Sure you want to delete this?")) {
-    let blogs = JSON.parse(localStorage.getItem("blogs"));
-    blogs = blogs.filter((x) => x.id !== id);
-    localStorage.setItem("blogs", JSON.stringify(blogs));
-    location.reload();
+const saveData = () => {
+  if (validateBlogForm()) {
+    let imgPath = document.querySelector("input[type=file]").files[0];
+    let body = new FormData();
+    body.set("key", "298034d3800cbebc036e919c320a1f11");
+    body.append("image", imgPath);
+
+    axios({
+      method: "post",
+      url: "https://api.imgbb.com/1/upload",
+      data: body,
+    })
+      .then((res) => {
+        let url = res.data.data.display_url;
+        let title = document.querySelector("input[name=a_title]").value;
+        let content = document.querySelector("textarea[name=a_content]").value;
+
+        newArticle(
+          title,
+          content,
+          url,
+          document.querySelector("input[name=isPublished]").checked
+        );
+      })
+      .catch((err) => console.log(err));
   }
 };
 
-const likeBlog = (num) => {
-  const id = new URLSearchParams(window.location.search).get("id");
-  let blogs = JSON.parse(localStorage.getItem("blogs"));
-  let u = blogs.findIndex((x) => x.id === parseFloat(id));
+const updateBlog = () => {
+  if (validateBlogForm("update")) {
+    const imgPath = document.querySelector("input[type=file]").files[0];
+    const id = new URLSearchParams(window.location.search).get("id");
 
-  if (u > -1) {
-    if (blogs[u].likes) {
-      blogs[u].likes += num;
+    let title = document.querySelector("input[name=a_title]").value;
+    let content = document.querySelector("textarea[name=a_content").value;
+    let published = document.querySelector("input[name=isPublished]").checked;
+
+    if (!imgPath) {
+      updateArticle(id, title, content, null, published);
     } else {
-      blogs[u].likes = num;
+      let body = new FormData();
+      body.set("key", "298034d3800cbebc036e919c320a1f11");
+      body.append("image", imgPath);
+      axios({
+        method: "post",
+        url: "https://api.imgbb.com/1/upload",
+        data: body,
+      })
+        .then((res) => {
+          updateArticle(
+            id,
+            title,
+            content,
+            res.data.data.display_url,
+            published
+          );
+        })
+        .catch((err) => console.log(err));
     }
-    localStorage.setItem("blogs", JSON.stringify(blogs));
   }
 };
+
+const makeProfile = (name) =>
+  name.split(" ")[1] ? name[0].concat(name.split(" ")[1][0]) : name[0];

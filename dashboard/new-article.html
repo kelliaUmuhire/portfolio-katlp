@@ -14,6 +14,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
   </head>
   <body>
     <div class="nav">
@@ -120,6 +121,11 @@
           <div class="error-msg" id="a_content_error"></div>
         </div>
 
+        <div>
+          <input type="checkbox" name="isPublished" />
+          Publish
+        </div>
+
         <button class="c-blog-btn" onclick="saveData()">CREATE</button>
       </div>
     </div>
@@ -133,6 +139,7 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       document
         .querySelector("input[name=custom_img]")

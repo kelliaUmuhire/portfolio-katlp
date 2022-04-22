@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/dashboard.css" />
     <link rel="stylesheet" href="../styles/posts.css" />
     <script src="../js/main.js"></script>
+    <script src="../js/services.js"></script>
     <style>
       .footer {
         position: absolute;
@@ -34,7 +35,7 @@
       <div class="nav-links">
         <a href="./index.html">Home</a>
         <a href="../pages/profile.html">Profile</a>
-        <a href="../index.html">Logout</a>
+        <a onclick="logout()">Logout</a>
       </div>
     </div>
 
@@ -99,49 +100,49 @@
     </div>
 
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      let posts = document.getElementById("posts");
+      getArticles("both", JSON.parse(localStorage.getItem("authUser")).id).then(
+        (res) => {
+          let posts = document.getElementById("posts");
+          for (let i = 0; i < res.data.length; i++) {
+            let post = document.createElement("div");
+            post.className = "post-cont";
+            let p_img = document.createElement("img");
+            p_img.src = res.data[i].picture;
+            p_img.alt = "Blog Image";
+            let p_title = document.createElement("div");
+            p_title.innerHTML = res.data[i].title;
+            p_title.className = "post-title";
+            let p_content = document.createElement("div");
+            p_content.className = "post-t-2";
+            p_content.innerHTML = res.data[i].content.substring(0, 70);
+            let p_actions = document.createElement("div");
+            p_actions.className = "actions";
+            let p_ed = document.createElement("div");
+            let p_ed_a = document.createElement("a");
+            p_ed_a.href = `./edit-article.html?id=${res.data[i]._id}`;
+            p_ed_a.innerHTML = "EDIT";
+            p_ed.appendChild(p_ed_a);
+            let p_del = document.createElement("div");
+            p_del.style.color = "#d458ab";
+            p_del.innerHTML = "DELETE";
+            p_del.addEventListener("click", (e) => {
+              removeArticle(res.data[i]._id);
+            });
 
-      let blogs = localStorage.getItem("blogs");
-      if (blogs) {
-        blogs = JSON.parse(blogs);
-        for (let i = 0; i < blogs.length; i++) {
-          let post = document.createElement("div");
-          post.className = "post-cont";
-          let p_img = document.createElement("img");
-          p_img.src = blogs[i].image;
-          p_img.alt = "Blog Image";
-          let p_title = document.createElement("div");
-          p_title.innerHTML = blogs[i].title;
-          p_title.className = "post-title";
-          let p_content = document.createElement("div");
-          p_content.className = "post-t-2";
-          p_content.innerHTML = blogs[i].content.substring(0, 70);
-          let p_actions = document.createElement("div");
-          p_actions.className = "actions";
-          let p_ed = document.createElement("div");
-          let p_ed_a = document.createElement("a");
-          p_ed_a.href = `./edit-article.html?id=${blogs[i].id}`;
-          p_ed_a.innerHTML = "EDIT";
-          p_ed.appendChild(p_ed_a);
-          let p_del = document.createElement("div");
-          p_del.style.color = "#d458ab";
-          p_del.innerHTML = "DELETE";
-          p_del.addEventListener("click", (e) => {
-            removeArticle(blogs[i].id);
-          });
+            p_actions.appendChild(p_ed);
+            p_actions.appendChild(p_del);
 
-          p_actions.appendChild(p_ed);
-          p_actions.appendChild(p_del);
+            post.appendChild(p_img);
+            post.appendChild(p_title);
+            post.appendChild(p_content);
+            post.appendChild(p_actions);
 
-          post.appendChild(p_img);
-          post.appendChild(p_title);
-          post.appendChild(p_content);
-          post.appendChild(p_actions);
-
-          posts.appendChild(post);
+            posts.appendChild(post);
+          }
         }
-      }
+      );
     </script>
   </body>
 </html>

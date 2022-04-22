@@ -11,7 +11,8 @@ function checkNav() {
     let a3 = document.createElement("a");
     a3.innerHTML = "Log out";
     // a3.href = "../index.html";
-    a3.addEventListener("click", console.log("clicked"));
+    a3.addEventListener("click", () => logout());
+    a3.style.cursor = "pointer";
     nav_links.appendChild(a1);
     nav_links.appendChild(a2);
     nav_links.appendChild(a3);

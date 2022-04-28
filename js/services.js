@@ -76,6 +76,8 @@ const getArticle = async (dash) => {
       return article;
     }
 
+    document.title = article.data.title;
+
     document.getElementsByClassName("p-post-title")[0].innerHTML =
       article.data.title;
     document.getElementsByClassName("p-post-content")[0].innerHTML =
@@ -144,7 +146,7 @@ const updateArticle = (id, title, content, url, published) => {
   if (title) data.title = title;
   if (content) data.content = content;
   if (url) data.picture = url;
-  if (published) data.published = published;
+  if (published !== undefined) data.published = published;
   axios
     .patch(`${baseURL}articles/${id}`, data, {
       headers: {

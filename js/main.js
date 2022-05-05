@@ -33,12 +33,12 @@ function fillProfile() {
   });
 }
 
-function showPassword() {
-  let p_password = document.querySelector("input[name=p_password]");
+function showPassword(c_name) {
+  let p_password = document.querySelector(`input[name=${c_name}]`);
   if (p_password.type === "text") {
     p_password.type = "password";
-  }
-  if (p_password.type === "password") p_password.type = "text";
+  } else p_password.type = "text";
+  // if (p_password.type === "password") p_password.type = "text";
 }
 
 function updateProfile() {

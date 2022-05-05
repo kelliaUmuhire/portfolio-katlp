@@ -64,14 +64,17 @@
         <div class="field_title">OLD PASSWORD</div>
         <input type="password" name="old_p_password" />
         <div class="error-msg" id="old_password_error"></div>
-        <ion-icon name="eye"></ion-icon>
+        <ion-icon
+          name="eye"
+          onclick="showPassword('old_p_password')"
+        ></ion-icon>
       </div>
 
       <div class="input-group p_pass">
         <div class="field_title">NEW PASSWORD</div>
         <input type="password" name="p_password" />
         <div class="error-msg" id="pass_err"></div>
-        <ion-icon name="eye" onclick="showPassword()"></ion-icon>
+        <ion-icon name="eye" onclick="showPassword('p_password')"></ion-icon>
       </div>
       <div class="up-btn" onclick="updateProfile()">Update</div>
       <!-- </div> -->

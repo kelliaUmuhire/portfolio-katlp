@@ -49,10 +49,11 @@
           <input type="email" name="email" />
           <div class="error-msg" id="email_err"></div>
         </div>
-        <div class="input-group">
+        <div class="input-group ll_pass">
           <div>PASSWORD</div>
           <input type="password" name="password" />
           <div class="error-msg" id="pass_err"></div>
+          <ion-icon name="eye" onclick="showPassword('password')"></ion-icon>
         </div>
       </div>
       <button onclick="login()">LOGIN</button>
@@ -71,6 +72,11 @@
       </div>
     </div>
 
+    <script>
+      if (localStorage.getItem("authToken")) history.back();
+    </script>
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

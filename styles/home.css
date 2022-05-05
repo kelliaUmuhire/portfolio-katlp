@@ -257,6 +257,20 @@
   cursor: pointer;
 }
 
+.ll_pass {
+  position: relative;
+}
+
+.ll_pass ion-icon {
+  position: absolute;
+  right: 3%;
+  top: 52%;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  color: #1f1b27;
+}
+
 .already {
   margin-top: 30px;
   color: #dfdfdf;

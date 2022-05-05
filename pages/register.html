@@ -75,6 +75,10 @@
       </div>
     </div>
 
+    <script>
+      if (localStorage.getItem("authToken")) history.back();
+    </script>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

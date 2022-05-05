@@ -9,7 +9,7 @@
   display: flex;
   width: 100%;
   flex-wrap: wrap;
-  margin-top: 40px;
+  margin-top: 80px;
   padding: 5px 30px;
 }
 
@@ -36,19 +36,19 @@
 .post-title {
   font-size: 15px;
   font-weight: bold;
-  padding-top: 2.5rem;
+  padding-top: 3rem;
 }
 .post-cont img {
   position: absolute;
   top: -25%;
-  width: 90px;
-  height: 95px;
-  left: 25%;
+  width: 80px;
+  height: 85px;
+  left: 23.5%;
 }
 
 .p-post {
   font-family: "Open Sans", sans-serif;
-  padding: 10px 30px;
+  padding: 15px 30px;
   margin-top: 50px;
 }
 .p-post-header {
@@ -57,7 +57,7 @@
 .p-post-header img {
   width: 115px;
   height: 120px;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 .p-post-header .p-post-h {
@@ -229,6 +229,14 @@
   .posts-title {
     padding: 0px 20px;
   }
+  .post-title {
+    padding-top: 2.3rem;
+  }
+  .post-cont img {
+    width: 70px;
+    height: 80px;
+    top: -25%;
+  }
   .posts,
   .more,
   .p-post,
@@ -239,7 +247,7 @@
   .post-cont {
     width: 45%;
     margin-right: 16px;
-    margin-top: 40px;
+    margin-top: 70px;
   }
   /* .rate-img {
     width: 300px;
